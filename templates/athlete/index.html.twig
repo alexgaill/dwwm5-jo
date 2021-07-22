@@ -1,20 +1,51 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}Hello AthleteController!{% endblock %}
-
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <h1 class="mt-5 mb-5">Liste des athlètes participants aux JO</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/Applications/MAMP/htdocs/cours/altrh/dwwm5/jo/src/Controller/AthleteController.php'|file_link(0) }}">src/Controller/AthleteController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/Applications/MAMP/htdocs/cours/altrh/dwwm5/jo/templates/athlete/index.html.twig'|file_link(0) }}">templates/athlete/index.html.twig</a></code></li>
-    </ul>
-</div>
+    {% for type, messages in app.flashes %}
+        <div class="alert alert-{{type}}">
+            <ul class="list-group list-group-{{type}}">
+                {% for message in messages %}
+                    <li class="list-group-item">{{message}}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endfor %}
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>#Photo</th>
+                <th>#Nom</th>
+                <th>#Prenom</th>
+                <th>#Date de naissance</th>
+                <th>#Discipline</th>
+                <th>#Drapeau</th>
+                <th>#Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for obj in athletes %}
+                <tr>
+                    <td><img src="{{ asset("/img/profil/" ~ obj.photo)}}" alt="{{obj.nom}} {{obj.prenom}}"></td>
+                    <td>{{obj.nom}}</td>
+                    <td>{{obj.prenom}}</td>
+                    <td>{{obj.dateNaissance | date("d/m/Y")}}</td>
+                    <td>{{obj.discipline.nom}}</td>
+                    <td><img src="{{ asset("/img/profil/" ~ obj.pays.drapeau)}}" alt="{{obj.pays.nom}}"></td>
+                    <td>
+                        <a href="{{ path("updateAthlete", {id: obj.id})}}"><button class="btn btn-warning">Modifier</button></a>
+                        <a href="{{ path("deleteAthlete", {id: obj.id})}}"><button class="btn btn-danger">Supprimer</button></a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="7">Pas d'athlète d'inscrit pour le moment</td>
+                </tr>
+            {% endfor %}
+            <tr>
+                <td colspan="7"><a href="{{ path("createAthlete")}}"><button class="btn btn-primary">Ajouter un athlète</button></a></td>
+            </tr>
+        </tbody>
+    </table>
 {% endblock %}

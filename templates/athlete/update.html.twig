@@ -1,0 +1,7 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <h1 class=" mb-5 mt-5"> Mise à jour de l'athlète: {{athlete.prenom}} {{athlete.nom}}</h1>
+
+    {% include "athlete/_form.html.twig" %}
+{% endblock %}

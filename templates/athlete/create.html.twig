@@ -1,0 +1,17 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <h1 class="mt-5 mb-5">Ajout d'un nouvel athlete</h1>
+
+    {% for type, messages in app.flashes %}
+        <div class="alert alert-{{type}}">
+            <ul class="list-group list-group-{{type}}">
+                {% for message in messages %}
+                    <li class="list-group-item">{{message}}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endfor %}
+
+    {% include "athlete/_form.html.twig" %}
+{% endblock %}

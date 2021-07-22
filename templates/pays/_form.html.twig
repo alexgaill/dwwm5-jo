@@ -1,0 +1,14 @@
+{{form_start(form)}}
+    <div class="mb-3">
+        {{form_label(form.nom, "Nom:", {'attr': {'class': 'form-label'}}) }}
+        {{form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="mb-3">
+        {{form_label(form.drapeau, "Drapeau:", {"attr": {"class": "form-label"}})}}
+        {{form_widget(form.drapeau, {"attr": {"class": "form-control"}})}}
+    </div>
+    <div class="mb-3">
+        {{form_row(form.Ajouter, {"attr": {"class": "btn btn-primary"}})}}
+    </div>
+
+{{form_end(form)}}

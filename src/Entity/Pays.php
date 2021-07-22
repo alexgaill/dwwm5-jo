@@ -12,6 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass=PaysRepository::class)
  * @UniqueEntity("nom")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Pays
 {
@@ -60,12 +61,12 @@ class Pays
         return $this;
     }
 
-    public function getDrapeau(): ?string
+    public function getDrapeau()
     {
         return $this->drapeau;
     }
 
-    public function setDrapeau(string $drapeau): self
+    public function setDrapeau($drapeau): self
     {
         $this->drapeau = $drapeau;
 
@@ -100,5 +101,18 @@ class Pays
         }
 
         return $this;
+    }
+
+    /**
+     * @ORM\PostRemove
+     *
+     * @return bool
+     */
+    public function deleteDrapeau()
+    {
+        if (file_exists(__DIR__ ."/../../public/img/drapeaux/".$this->drapeau)) {
+            unlink(__DIR__ ."/../../public/img/drapeaux/".$this->drapeau);
+        }
+        return true;
     }
 }

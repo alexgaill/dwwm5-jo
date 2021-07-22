@@ -1,0 +1,30 @@
+{{form_start(form)}}
+    <div class="mb-3">
+        {{form_label(form.nom, "Nom:", {'attr': {'class': 'form-label'}}) }}
+        {{form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="mb-3">
+        {{form_label(form.prenom, "Prenom:", {'attr': {'class': 'form-label'}}) }}
+        {{form_widget(form.prenom, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="mb-3">
+        {{form_label(form.dateNaissance, "Date de Naissance:", {'attr': {'class': 'form-label'}}) }}
+        {{form_widget(form.dateNaissance, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="mb-3">
+        {{form_label(form.photo, "Photo de profil:", {"attr": {"class": "form-label"}})}}
+        {{form_widget(form.photo, {"attr": {"class": "form-control"}})}}
+    </div>
+    <div class="mb-3">
+        {{form_label(form.discipline, "Photo de profil:", {"attr": {"class": "form-label"}})}}
+        {{form_widget(form.discipline, {"attr": {"class": "form-control"}})}}
+    </div>
+    <div class="mb-3">
+        {{form_label(form.pays, "Photo de profil:", {"attr": {"class": "form-label"}})}}
+        {{form_widget(form.pays, {"attr": {"class": "form-control"}})}}
+    </div>
+    <div class="mb-3">
+        {{form_row(form.Ajouter, {"attr": {"class": "btn btn-primary"}})}}
+    </div>
+
+{{form_end(form)}}

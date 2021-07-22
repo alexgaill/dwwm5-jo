@@ -24,16 +24,11 @@ class Discipline
 
     /**
      * @ORM\Column(type="string", length=100)
-     * @Assert\Regex(
-     *     pattern="/\d/",
-     *     match=false,
-     *     message="La discipline ne peut pas contenir de nombre"
-     * )
      */
     private $nom;
 
     /**
-     * @ORM\Column(type="integer", options={"default":0})
+     * @ORM\Column(type="integer", options={"default" : 0}, nullable=true)
      */
     private $nombreCandidats;
 
