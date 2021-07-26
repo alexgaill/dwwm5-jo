@@ -92,13 +92,15 @@ class AthleteController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $athlete = $form->getData();
+            
             $discipline = $athlete->getDiscipline();
-            $oldDiscipline = $athlete->getOldDiscipline();
             $nbCandidats = $discipline->getNombreCandidats() +1;
-            $oldNbCandidats = $oldDiscipline->getNombreCandidats() -1;
             $discipline->setNombreCandidats($nbCandidats);
-            $oldDiscipline->setNombreCandidats($oldNbCandidats);
             $athlete->setDiscipline($discipline);
+
+            $oldDiscipline = $athlete->getOldDiscipline();
+            $oldNbCandidats = $oldDiscipline->getNombreCandidats() -1;
+            $oldDiscipline->setNombreCandidats($oldNbCandidats);
 
             if ($athlete->getPhoto() === null) {
                 $athlete->setPhoto($athlete->getOldPhoto());
@@ -111,7 +113,7 @@ class AthleteController extends AbstractController
                     $photoName
                 );
                 $athlete->setPhoto($photoName);
-                
+
                 if (file_exists($this->getParameter("upload_profil") ."/". $athlete->getOldPhoto())) {
                     unlink($this->getParameter("upload_profil") ."/". $athlete->getOldPhoto());
                 }
